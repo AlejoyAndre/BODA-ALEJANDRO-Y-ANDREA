@@ -16,7 +16,7 @@
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: #f4f1ea; /* Tono crema suave, elegante y cálido */
+            background-color: #f4f1ea; 
             color: #4a4a4a;
             line-height: 1.6;
             text-align: center;
@@ -63,14 +63,14 @@
 
         /* Hero / Portada */
         .hero {
-            padding: 60px 20px 40px 20px;
+            padding: 60px 20px 20px 20px;
             background: linear-gradient(rgba(244, 241, 234, 0.4), rgba(255, 255, 255, 1));
         }
 
         h1 {
             font-family: 'Alex Brush', cursive;
             font-size: 48px;
-            color: #d4af37; /* Dorado clásico para bodas */
+            color: #d4af37; 
             margin-bottom: 10px;
             font-weight: 400;
         }
@@ -80,31 +80,21 @@
             text-transform: uppercase;
             letter-spacing: 3px;
             color: #8e8e8e;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
-        /* Espacio para la Imagen de Canva */
+        /* Contenedor de Imágenes */
         .invitation-image-container {
             padding: 0 20px;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
 
-        .invitation-placeholder {
+        .invitation-img {
             width: 100%;
+            display: block;
             border-radius: 8px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.07);
-            border: 1px solid #f0eae1;
-            background-color: #fafafa;
-            padding: 40px 20px;
-            display: inline-block;
-        }
-
-        .placeholder-text {
-            color: #a1a1a1;
-            font-size: 14px;
-            border: 2px dashed #d4af37;
-            padding: 40px 10px;
-            border-radius: 4px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 15px;
         }
 
         /* Secciones de Información */
@@ -197,57 +187,43 @@
 </head>
 <body>
 
-    <!-- Reproductor de Música Flotante -->
-    <!-- Reemplazar el 'src' con el link directo de tu canción en formato MP3 o Dropbox (con el parámetro raw=1) -->
     <div class="music-player" onclick="toggleMusic()" id="musicBtn" title="Reproducir/Pausar Música">
         <span class="music-icon" id="musicIcon">🎵</span>
     </div>
     <audio id="bgMusic" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        <source src="musica.mp3" type="audio/mpeg">
         Tu navegador no soporta reproducción de audio.
     </audio>
 
     <div class="container">
         
-        <!-- Portada de la Invitación -->
         <div class="hero">
             <h1>Nuestra Boda</h1>
             <div class="subtitle">¡Nos Casamos!</div>
         </div>
 
-        <!-- AQUÍ VA TU DISEÑO DE CANVA -->
         <div class="invitation-image-container">
-            <div class="invitation-placeholder">
-                <!-- Cuando exportes tu Canva como imagen PNG, súbela a un servidor y reemplaza este bloque por tu etiqueta de imagen: -->
-                <!-- <img src="link_de_tu_imagen_de_canva.png" alt="Invitación de Matrimonio" style="width:100%; border-radius:4px;"> -->
-                <div class="placeholder-text">
-                    <strong>[ AQUÍ VA TU DISEÑO DE CANVA ]</strong><br><br>
-                    Descarga tu tarjeta de Canva como PNG de alta calidad, súbela aquí y reemplazará este recuadro.
-                </div>
-            </div>
+            <img src="invitacion.png" alt="Invitación de Matrimonio" class="invitation-img">
+            <img src="lugar.png" alt="Detalles del Lugar" class="invitation-img">
         </div>
 
-        <!-- Sección de Ubicación e Itinerario -->
         <div class="section">
             <div class="section-title">📍 Lugar y Hora</div>
             <p>Estamos felices de compartir este momento contigo. Para que no tengas problemas al llegar, selecciona tu aplicación de navegación preferida:</p>
             
-            <!-- ENLACES DE UBICACIÓN (Reemplazar con tus links reales del lugar del evento) -->
             <a href="https://maps.google.com" target="_blank" class="btn btn-maps">
                 <span class="icon">🗺️</span> Google Maps
             </a>
-            <a href="https://waze.com" target="_blank" class="btn btn-waze">
+            <a href="https://ul.waze.com/ul?place=ChIJR946dxGAP44RFJEYUh5q6o8&ll=4.85655030%2C-74.20117960&navigate=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location" target="_blank" class="btn btn-waze">
                 <span class="icon">🚙</span> Waze
             </a>
         </div>
 
-        <!-- Sección de Confirmación (RSVP) -->
         <div class="section" style="background-color: #faf9f6;">
             <div class="section-title">✍️ Confirmación de Asistencia</div>
             <p>Por favor, ayúdanos a organizar los detalles confirmando tu asistencia antes de la fecha límite.</p>
             
-            <!-- ENLACE DEL FORMULARIO (Reemplazar con tu link de Google Forms o Typeform) -->
-            <a href="https://docs.google.com/forms" target="_blank" class="btn btn-primary">
+            <a href="https://forms.google.com" target="_blank" class="btn btn-primary">
                 <span class="icon">💍</span> Confirmar Aquí
             </a>
         </div>
@@ -258,7 +234,6 @@
 
     </div>
 
-    <!-- Script para controlar la reproducción de música interactiva -->
     <script>
         var music = document.getElementById("bgMusic");
         var musicBtn = document.getElementById("musicBtn");
@@ -276,16 +251,23 @@
             }
         }
 
-        // Intento de reproducción automática al primer toque en la pantalla por restricciones del navegador
-        document.body.addEventListener('click', function() {
-            if (music.paused && musicIcon.innerText === "🎵") {
-                // Descomenta la línea de abajo si quieres que intente arrancar sola al hacer clic en cualquier lado
-                // music.play(); musicIcon.innerText = "⏸️";
+        // Intento de reproducción al interactuar con el sitio
+        function intentarAutoplay() {
+            if (music.paused) {
+                music.play().then(() => {
+                    musicIcon.innerText = "⏸️";
+                    musicBtn.style.animation = "pulse 2s infinite";
+                }).catch(error => {
+                    console.log("Autoplay bloqueado por el navegador, esperando clic.");
+                });
             }
-        }, { once: true });
+        }
+
+        document.body.addEventListener('click', intentarAutoplay, { once: true });
+        document.body.addEventListener('touchstart', intentarAutoplay, { once: true });
+        window.addEventListener('scroll', intentarAutoplay, { once: true });
     </script>
 
-    <!-- Animación sutil para el botón de música cuando está sonando -->
     <style>
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
@@ -293,6 +275,6 @@
             100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
         }
     </style>
- 
+
 </body>
 </html>
