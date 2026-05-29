@@ -23,7 +23,7 @@
             overflow-x: hidden;
         }
 
-        /* PANTALLA DE BIENVENIDA (Filtro Anti-Bloqueo de Audio) */
+        /* PANTALLA DE BIENVENIDA */
         #welcome-screen {
             position: fixed;
             top: 0;
@@ -52,7 +52,7 @@
         .welcome-title {
             font-family: 'Alex Brush', cursive;
             font-size: 42px;
-            color: #d4af37;
+            color: #1e3f20; /* Verde Oscuro */
             margin-bottom: 5px;
         }
 
@@ -91,13 +91,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid #d4af37;
+            border: 1px solid #1e3f20; /* Verde Oscuro */
             transition: transform 0.3s ease;
         }
 
         .music-icon {
             font-size: 20px;
-            color: #d4af37;
+            color: #1e3f20; /* Verde Oscuro */
         }
 
         /* Hero / Portada */
@@ -109,7 +109,7 @@
         h1 {
             font-family: 'Alex Brush', cursive;
             font-size: 48px;
-            color: #d4af37; 
+            color: #1e3f20; /* Verde Oscuro */
             margin-bottom: 10px;
             font-weight: 400;
         }
@@ -146,7 +146,7 @@
             font-size: 16px;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: #d4af37;
+            color: #1e3f20; /* Verde Oscuro */
             margin-bottom: 20px;
             font-weight: 600;
         }
@@ -173,156 +173,4 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn-primary {
-            background-color: #d4af37;
-            color: #ffffff;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-        }
-
-        .btn-primary:hover {
-            background-color: #c19e31;
-            transform: translateY(-2px);
-        }
-
-        .btn-maps {
-            background-color: #ffffff;
-            color: #4285F4;
-            border: 1px solid #4285F4;
-        }
-
-        .btn-maps:hover {
-            background-color: #f1f6ff;
-            transform: translateY(-2px);
-        }
-
-        .btn-waze {
-            background-color: #ffffff;
-            color: #33ccff;
-            border: 1px solid #33ccff;
-        }
-
-        .btn-waze:hover {
-            background-color: #f0faff;
-            transform: translateY(-2px);
-        }
-
-        .icon {
-            margin-right: 10px;
-            font-weight: bold;
-        }
-
-        .footer {
-            padding: 30px 20px;
-            font-size: 12px;
-            color: #b5b5b5;
-            letter-spacing: 1px;
-        }
-    </style>
-</head>
-<body>
-
-    <div id="welcome-screen">
-        <div class="welcome-content">
-            <div class="welcome-title">Alejandro & Andrea</div>
-            <div class="welcome-text">Nuestra Invitación</div>
-            <button onclick="entrarInvitacion()" class="btn btn-primary" style="box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-                <span class="icon">🎵</span> Abrir Invitación
-            </button>
-        </div>
-    </div>
-
-    <div class="music-player" onclick="toggleMusic()" id="musicBtn" title="Reproducir/Pausar Música">
-        <span class="music-icon" id="musicIcon">🎵</span>
-    </div>
-    <audio id="bgMusic" loop>
-        <source src="musica.mp3" type="audio/mpeg">
-        Tu navegador no soporta reproducción de audio.
-    </audio>
-
-    <div class="container">
-        
-        <div class="hero">
-            <h1>Nuestra Boda</h1>
-            <div class="subtitle">¡Nos Casamos!</div>
-        </div>
-
-        <div class="invitation-image-container">
-            <img src="invitacion.png" alt="Invitación de Matrimonio" class="invitation-img">
-            <img src="lugar.png" alt="Detalles del Lugar" class="invitation-img">
-        </div>
-
-        <div class="section">
-            <div class="section-title">📍 Lugar y Hora</div>
-            <p>Estamos felices de compartir este momento contigo. Para que no tengas problemas al llegar, selecciona tu aplicación de navegación preferida:</p>
-            
-            <a href="https://maps.google.com" target="_blank" class="btn btn-maps">
-                <span class="icon">🗺️</span> Google Maps
-            </a>
-            <a href="https://ul.waze.com/ul?place=ChIJR946dxGAP44RFJEYUh5q6o8&ll=4.85655030%2C-74.20117960&navigate=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location" target="_blank" class="btn btn-waze">
-                <span class="icon">🚙</span> Waze
-            </a>
-        </div>
-
-        <div class="section" style="background-color: #faf9f6;">
-            <div class="section-title">✍️ Confirmación de Asistencia</div>
-            <p>Por favor, ayúdanos a organizar los detalles confirmando tu asistencia antes de la fecha límite.</p>
-            
-            <a href="https://forms.google.com" target="_blank" class="btn btn-primary">
-                <span class="icon">💍</span> Confirmar Aquí
-            </a>
-        </div>
-
-        <div class="footer">
-            Hecho con ❤️ para un día inolvidable
-        </div>
-
-    </div>
-
-    <script>
-        var music = document.getElementById("bgMusic");
-        var musicBtn = document.getElementById("musicBtn");
-        var musicIcon = document.getElementById("musicIcon");
-
-        function toggleMusic() {
-            if (music.paused) {
-                music.play();
-                musicIcon.innerText = "⏸️";
-                musicBtn.style.animation = "pulse 2s infinite";
-            } else {
-                music.pause();
-                musicIcon.innerText = "🎵";
-                musicBtn.style.animation = "none";
-            }
-        }
-
-        // Función que se ejecuta al darle clic a "Abrir Invitación"
-        function entrarInvitacion() {
-            // 1. Desvanecer la pantalla de bienvenida
-            var welcome = document.getElementById("welcome-screen");
-            welcome.style.opacity = "0";
-            welcome.style.visibility = "hidden";
-
-            // 2. Forzar la reproducción de música (el navegador lo permite porque viene de un clic real)
-            music.play().then(() => {
-                musicIcon.innerText = "⏸️";
-                musicBtn.style.animation = "pulse 2s infinite";
-            }).catch(error => {
-                console.log("Audio bloqueado temporalmente.");
-            });
-        }
-    </script>
-
-    <style>
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
-        }
-    </style>
-
-</body>
-</html>
+            border: none
