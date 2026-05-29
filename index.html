@@ -20,8 +20,51 @@
             color: #4a4a4a;
             line-height: 1.6;
             text-align: center;
+            overflow-x: hidden;
         }
 
+        /* PANTALLA DE BIENVENIDA (Filtro Anti-Bloqueo de Audio) */
+        #welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f4f1ea;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .welcome-content {
+            background-color: #ffffff;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .welcome-title {
+            font-family: 'Alex Brush', cursive;
+            font-size: 42px;
+            color: #d4af37;
+            margin-bottom: 5px;
+        }
+
+        .welcome-text {
+            font-size: 14px;
+            color: #777777;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* CONTENEDOR PRINCIPAL DE LA WEB */
         .container {
             max-width: 500px;
             margin: 0 auto;
@@ -38,7 +81,7 @@
             top: 20px;
             right: 20px;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.9);
             padding: 10px;
             border-radius: 50%;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -50,10 +93,6 @@
             justify-content: center;
             border: 1px solid #d4af37;
             transition: transform 0.3s ease;
-        }
-
-        .music-player:hover {
-            transform: scale(1.1);
         }
 
         .music-icon {
@@ -176,7 +215,6 @@
             font-weight: bold;
         }
 
-        /* Footer */
         .footer {
             padding: 30px 20px;
             font-size: 12px;
@@ -186,6 +224,16 @@
     </style>
 </head>
 <body>
+
+    <div id="welcome-screen">
+        <div class="welcome-content">
+            <div class="welcome-title">Alejandro & Andrea</div>
+            <div class="welcome-text">Nuestra Invitación</div>
+            <button onclick="entrarInvitacion()" class="btn btn-primary" style="box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                <span class="icon">🎵</span> Abrir Invitación
+            </button>
+        </div>
+    </div>
 
     <div class="music-player" onclick="toggleMusic()" id="musicBtn" title="Reproducir/Pausar Música">
         <span class="music-icon" id="musicIcon">🎵</span>
@@ -211,7 +259,7 @@
             <div class="section-title">📍 Lugar y Hora</div>
             <p>Estamos felices de compartir este momento contigo. Para que no tengas problemas al llegar, selecciona tu aplicación de navegación preferida:</p>
             
-            <a href="https://maps.app.goo.gl/fJ2nkJDbrb7jfbTc9" target="_blank" class="btn btn-maps">
+            <a href="https://maps.google.com" target="_blank" class="btn btn-maps">
                 <span class="icon">🗺️</span> Google Maps
             </a>
             <a href="https://ul.waze.com/ul?place=ChIJR946dxGAP44RFJEYUh5q6o8&ll=4.85655030%2C-74.20117960&navigate=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location" target="_blank" class="btn btn-waze">
@@ -251,21 +299,21 @@
             }
         }
 
-        // Intento de reproducción al interactuar con el sitio
-        function intentarAutoplay() {
-            if (music.paused) {
-                music.play().then(() => {
-                    musicIcon.innerText = "⏸️";
-                    musicBtn.style.animation = "pulse 2s infinite";
-                }).catch(error => {
-                    console.log("Autoplay bloqueado por el navegador, esperando clic.");
-                });
-            }
-        }
+        // Función que se ejecuta al darle clic a "Abrir Invitación"
+        function entrarInvitacion() {
+            // 1. Desvanecer la pantalla de bienvenida
+            var welcome = document.getElementById("welcome-screen");
+            welcome.style.opacity = "0";
+            welcome.style.visibility = "hidden";
 
-        document.body.addEventListener('click', intentarAutoplay, { once: true });
-        document.body.addEventListener('touchstart', intentarAutoplay, { once: true });
-        window.addEventListener('scroll', intentarAutoplay, { once: true });
+            // 2. Forzar la reproducción de música (el navegador lo permite porque viene de un clic real)
+            music.play().then(() => {
+                musicIcon.innerText = "⏸️";
+                musicBtn.style.animation = "pulse 2s infinite";
+            }).catch(error => {
+                console.log("Audio bloqueado temporalmente.");
+            });
+        }
     </script>
 
     <style>
