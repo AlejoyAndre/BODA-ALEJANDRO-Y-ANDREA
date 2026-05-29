@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Boda - Invitación Digital</title>
+    <style>
+        /* Tipografías y Estilos Globales */
+        @import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:wght@300;400;600&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f4f1ea; /* Tono crema suave, elegante y cálido */
+            color: #4a4a4a;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            padding-bottom: 60px;
+            position: relative;
+        }
+
+        /* Reproductor de Música Flotante */
+        .music-player {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #d4af37;
+            transition: transform 0.3s ease;
+        }
+
+        .music-player:hover {
+            transform: scale(1.1);
+        }
+
+        .music-icon {
+            font-size: 20px;
+            color: #d4af37;
+        }
+
+        /* Hero / Portada */
+        .hero {
+            padding: 60px 20px 40px 20px;
+            background: linear-gradient(rgba(244, 241, 234, 0.4), rgba(255, 255, 255, 1));
+        }
+
+        h1 {
+            font-family: 'Alex Brush', cursive;
+            font-size: 48px;
+            color: #d4af37; /* Dorado clásico para bodas */
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #8e8e8e;
+            margin-bottom: 30px;
+        }
+
+        /* Espacio para la Imagen de Canva */
+        .invitation-image-container {
+            padding: 0 20px;
+            margin-bottom: 40px;
+        }
+
+        .invitation-placeholder {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.07);
+            border: 1px solid #f0eae1;
+            background-color: #fafafa;
+            padding: 40px 20px;
+            display: inline-block;
+        }
+
+        .placeholder-text {
+            color: #a1a1a1;
+            font-size: 14px;
+            border: 2px dashed #d4af37;
+            padding: 40px 10px;
+            border-radius: 4px;
+        }
+
+        /* Secciones de Información */
+        .section {
+            padding: 40px 30px;
+            border-top: 1px solid #f4f1ea;
+        }
+
+        .section-title {
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #d4af37;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        p {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 15px;
+        }
+
+        /* Botones Interactivos */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 280px;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: #d4af37;
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: #c19e31;
+            transform: translateY(-2px);
+        }
+
+        .btn-maps {
+            background-color: #ffffff;
+            color: #4285F4;
+            border: 1px solid #4285F4;
+        }
+
+        .btn-maps:hover {
+            background-color: #f1f6ff;
+            transform: translateY(-2px);
+        }
+
+        .btn-waze {
+            background-color: #ffffff;
+            color: #33ccff;
+            border: 1px solid #33ccff;
+        }
+
+        .btn-waze:hover {
+            background-color: #f0faff;
+            transform: translateY(-2px);
+        }
+
+        .icon {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 30px 20px;
+            font-size: 12px;
+            color: #b5b5b5;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Reproductor de Música Flotante -->
+    <!-- Reemplazar el 'src' con el link directo de tu canción en formato MP3 o Dropbox (con el parámetro raw=1) -->
+    <div class="music-player" onclick="toggleMusic()" id="musicBtn" title="Reproducir/Pausar Música">
+        <span class="music-icon" id="musicIcon">🎵</span>
+    </div>
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        Tu navegador no soporta reproducción de audio.
+    </audio>
+
+    <div class="container">
+        
+        <!-- Portada de la Invitación -->
+        <div class="hero">
+            <h1>Nuestra Boda</h1>
+            <div class="subtitle">¡Nos Casamos!</div>
+        </div>
+
+        <!-- AQUÍ VA TU DISEÑO DE CANVA -->
+        <div class="invitation-image-container">
+            <div class="invitation-placeholder">
+                <!-- Cuando exportes tu Canva como imagen PNG, súbela a un servidor y reemplaza este bloque por tu etiqueta de imagen: -->
+                <!-- <img src="link_de_tu_imagen_de_canva.png" alt="Invitación de Matrimonio" style="width:100%; border-radius:4px;"> -->
+                <div class="placeholder-text">
+                    <strong>[ AQUÍ VA TU DISEÑO DE CANVA ]</strong><br><br>
+                    Descarga tu tarjeta de Canva como PNG de alta calidad, súbela aquí y reemplazará este recuadro.
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de Ubicación e Itinerario -->
+        <div class="section">
+            <div class="section-title">📍 Lugar y Hora</div>
+            <p>Estamos felices de compartir este momento contigo. Para que no tengas problemas al llegar, selecciona tu aplicación de navegación preferida:</p>
+            
+            <!-- ENLACES DE UBICACIÓN (Reemplazar con tus links reales del lugar del evento) -->
+            <a href="https://maps.google.com" target="_blank" class="btn btn-maps">
+                <span class="icon">🗺️</span> Google Maps
+            </a>
+            <a href="https://waze.com" target="_blank" class="btn btn-waze">
+                <span class="icon">🚙</span> Waze
+            </a>
+        </div>
+
+        <!-- Sección de Confirmación (RSVP) -->
+        <div class="section" style="background-color: #faf9f6;">
+            <div class="section-title">✍️ Confirmación de Asistencia</div>
+            <p>Por favor, ayúdanos a organizar los detalles confirmando tu asistencia antes de la fecha límite.</p>
+            
+            <!-- ENLACE DEL FORMULARIO (Reemplazar con tu link de Google Forms o Typeform) -->
+            <a href="https://docs.google.com/forms" target="_blank" class="btn btn-primary">
+                <span class="icon">💍</span> Confirmar Aquí
+            </a>
+        </div>
+
+        <div class="footer">
+            Hecho con ❤️ para un día inolvidable
+        </div>
+
+    </div>
+
+    <!-- Script para controlar la reproducción de música interactiva -->
+    <script>
+        var music = document.getElementById("bgMusic");
+        var musicBtn = document.getElementById("musicBtn");
+        var musicIcon = document.getElementById("musicIcon");
+
+        function toggleMusic() {
+            if (music.paused) {
+                music.play();
+                musicIcon.innerText = "⏸️";
+                musicBtn.style.animation = "pulse 2s infinite";
+            } else {
+                music.pause();
+                musicIcon.innerText = "🎵";
+                musicBtn.style.animation = "none";
+            }
+        }
+
+        // Intento de reproducción automática al primer toque en la pantalla por restricciones del navegador
+        document.body.addEventListener('click', function() {
+            if (music.paused && musicIcon.innerText === "🎵") {
+                // Descomenta la línea de abajo si quieres que intente arrancar sola al hacer clic en cualquier lado
+                // music.play(); musicIcon.innerText = "⏸️";
+            }
+        }, { once: true });
+    </script>
+
+    <!-- Animación sutil para el botón de música cuando está sonando -->
+    <style>
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+    </style>
+
+</body>
+</html>
